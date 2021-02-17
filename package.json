@@ -1,0 +1,25 @@
+{
+  "name": "new-server",
+  "version": "1.0.0",
+  "description": "creating a server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noavrd/new-server.git"
+  },
+  "author": "noa shalom",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/noavrd/new-server/issues"
+  },
+  "homepage": "https://github.com/noavrd/new-server#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
