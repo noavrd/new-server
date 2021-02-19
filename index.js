@@ -47,6 +47,7 @@ app.put('/b/:id', (req, res) => {
     res.send(successMessage); 
 })
 
+
 app.post('/b', (req, res) =>{
     try {
         const id = Date.now();
@@ -62,6 +63,7 @@ app.post('/b', (req, res) =>{
         res.status(404).json({"massage": "Bin not found or it doesn't belong to your account"})
     }
 });
+
 app.delete('/b/:id', (req, res) => {
     const id = req.params.id;
     const binExist = fs.existsSync(`./task/${id}.json`);
@@ -81,8 +83,6 @@ app.delete('/b/:id', (req, res) => {
     }   
     res.send(successMessage);
 })
-
-
 
 app.listen(3001, () => {
     console.log("run")
