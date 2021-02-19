@@ -62,6 +62,25 @@ app.post('/b', (req, res) =>{
         res.status(404).json({"massage": "Bin not found or it doesn't belong to your account"})
     }
 });
+app.delete('/b/:id', (req, res) => {
+    const id = req.params.id;
+    const binExist = fs.existsSync(`./task/${id}.json`);
+    if(!binExist) {
+        res.status(401).json({
+            "message": "Bin not found or it doesn't belong to your account",
+            "success": false
+        });
+        return;
+    }
+    fs.unlinkSync(`./task/${id}.json`);
+    const successMessage = {
+        success: true,
+        "version": 1,
+        "parentId": id,
+        "message": "Bin deleted successfully"
+    }   
+    res.send(successMessage);
+})
 
 
 
