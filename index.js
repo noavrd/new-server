@@ -3,6 +3,19 @@ const fs = require("fs");
 const app = express();
 app.use(express.json());
 
+app.get('/b', (req, res) => {
+    try {
+        const listOfTasks=[];
+        fs.readdirSync('./task').forEach(file => {
+            let task = JSON.parse(readFileSync(`./task/${file}`, {encoding: 'utf8', flag: 'r'}))
+            listOfTasks.push(task)
+        });
+        res.send(listOfTasks);
+    } catch(e) {
+        res.status(404).json({"massage": e})
+    }
+});
+
 app.get("/v3/b/:id", (req, res) => {
     const id = req.params.id;
     try {
@@ -34,6 +47,6 @@ app.put("/v3/b/:id", (req, res) => {
     res.send(successMessage);                                                        ")
 })
 
-app.listen(3000, () => {
+app.listen(3001, () => {
     console.log("run")
 });
