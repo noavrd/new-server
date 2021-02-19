@@ -49,3 +49,18 @@ app.put("/v3/b/:id", (req, res) => {
 app.listen(3001, () => {
     console.log("run")
 });
+app.post('/b', (req, res) =>{
+    try {
+        const id = Date.now();
+        const body = JSON.stringify(req.body, null, 4);
+        fs.writeFileSync(`./task/${id}.json`, body);
+        const successMessage = {
+            success: true,
+            "id": id,
+            "message": "Bin added successfully"
+        }
+        res.send(successMessage);
+    } catch {
+        res.status(404).json({"massage": "Bin not found or it doesn't belong to your account"})
+    }
+});
