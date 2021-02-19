@@ -16,16 +16,15 @@ app.get('/b', (req, res) => {
     }
 });
 
-app.get("/v3/b/:id", (req, res) => {
+app.get('/b/:id', (req, res) => {
     const id = req.params.id;
-    try {
-        const binContent = fs.readFileSync(`./bins/${id}.json`); //מקבלת את הקובץ שבתוך תיקייה בינס ומכניסה את התוכן שלה למשתנה בין קונטנט
-        res.send(binContent);
-    } catch(e) {
+    try{
+        const binContent = fs.readFileSync(`./task/${id}.json`, {encoding: 'utf8', flag: 'r'});
+        res.send(JSON.parse(binContent));
+    } catch(e){
         res.status(404).json({"message": "Invalid Record ID"});
     }
-});
-
+})
 app.put("/v3/b/:id", (req, res) => {
     const body = req.body;
     const id = req.params.id;
