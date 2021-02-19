@@ -25,10 +25,11 @@ app.get('/b/:id', (req, res) => {
         res.status(404).json({"message": "Invalid Record ID"});
     }
 })
-app.put("/v3/b/:id", (req, res) => {
+
+app.put('/b/:id', (req, res) => {
     const body = req.body;
     const id = req.params.id;
-    const binExist = fs.existsSync(`./bins/${id}.json`);
+    const binExist = fs.existsSync(`./task/${id}.json`);
     if(!binExist) {
         res.status(404).json({
             "message": "Bin not found",
@@ -36,19 +37,16 @@ app.put("/v3/b/:id", (req, res) => {
     });
     return;
     }
-    fs.existsSync(`./bins/${id}.json`, body);
+    fs.writeFileSync(`./task/${id}.json`, JSON.stringify(body, null, 4));
     const successMessage = {
         success: true,
         data: body,
         "version": 1,
         "parentId": id
     }   
-    res.send(successMessage);                                                        ")
+    res.send(successMessage); 
 })
 
-app.listen(3001, () => {
-    console.log("run")
-});
 app.post('/b', (req, res) =>{
     try {
         const id = Date.now();
@@ -63,4 +61,10 @@ app.post('/b', (req, res) =>{
     } catch {
         res.status(404).json({"massage": "Bin not found or it doesn't belong to your account"})
     }
+});
+
+
+
+app.listen(3001, () => {
+    console.log("run")
 });
