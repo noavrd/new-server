@@ -1,6 +1,12 @@
-const express = require("express");
-const fs = require("fs");
+const express = require('express');
 const app = express();
+const fs= require('fs');
+const {readFileSync} = require('fs');
+
+function delay(req, res, next) {
+    setTimeout(next, 1000);
+}
+app.use(delay);
 app.use(express.json());
 
 app.get('/b', (req, res) => {
