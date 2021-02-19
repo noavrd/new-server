@@ -90,6 +90,6 @@ app.delete('/b/:id', (req, res) => {
     res.send(successMessage);
 })
 
-app.listen(3001, () => {
-    console.log("run")
+app.listen(3000, () => {
+    console.log("listening to port 3000")
 });
